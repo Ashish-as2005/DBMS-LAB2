@@ -1,0 +1,65 @@
+--Implement the grouping Clouse Group  by ,Order by & having 
+--create table customer (Cid , C name ,Country)
+--1. Select count (Cid ) ,Country from customer , Group By country  ;
+--2. Select (Cid ) , cOUNTRY FROM CUSTOMER group by having count (Cid) > 2
+--3. Select cID ,Cname From Customer Order By Cid ASC;
+--4. Select cID ,Cname From Customer Order By Cid desc;
+--5. Select cID ,Cname From Customer Order By Cid Asc, Cname desc;
+--6. Create View Cust.View as Select(*) From Customer;
+--7. Drop view cust.VIew;
+
+--Customer/Country 
+--3 From India
+--4 From Japan
+--2 Frm USA
+--2 From UK
+
+
+--SQL
+
+CREATE TABLE customer (
+    Cid NUMBER,
+    Cname VARCHAR2(50),
+    Country VARCHAR2(50)
+);
+
+-- India (3 customers)
+INSERT INTO customer (Cid, Cname, Country) VALUES (101, 'Aman', 'India');
+INSERT INTO customer (Cid, Cname, Country) VALUES (102, 'Ravi', 'India');
+INSERT INTO customer (Cid, Cname, Country) VALUES (103, 'Priya', 'India');
+
+-- Japan (4 customers)
+INSERT INTO customer (Cid, Cname, Country) VALUES (201, 'Sora', 'Japan');
+INSERT INTO customer (Cid, Cname, Country) VALUES (202, 'Hana', 'Japan');
+INSERT INTO customer (Cid, Cname, Country) VALUES (203, 'Takeshi', 'Japan');
+INSERT INTO customer (Cid, Cname, Country) VALUES (204, 'Yuki', 'Japan');
+
+-- USA (2 customers)
+INSERT INTO customer (Cid, Cname, Country) VALUES (301, 'John', 'USA');
+INSERT INTO customer (Cid, Cname, Country) VALUES (302, 'Emily', 'USA');
+
+-- UK (2 customers)
+INSERT INTO customer (Cid, Cname, Country) VALUES (401, 'Oliver', 'UK');
+INSERT INTO customer (Cid, Cname, Country) VALUES (402, 'Emma', 'UK');
+
+SELECT COUNT(Cid) AS total_customers, Country 
+FROM customer 
+GROUP BY Country;
+
+SELECT Country, COUNT(Cid) AS total_customers 
+FROM customer 
+GROUP BY Country 
+HAVING COUNT(Cid) > 2;
+
+SELECT Cid, Cname 
+FROM customer 
+ORDER BY Cid ASC;
+
+SELECT Cid, Cname 
+FROM customer 
+ORDER BY Cid DESC;
+
+CREATE VIEW cust_view AS 
+SELECT * FROM customer;
+
+DROP VIEW cust_view;
