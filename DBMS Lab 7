@@ -1,0 +1,27 @@
+CREATE TABLE Employee (
+    empid NUMBER PRIMARY KEY,
+    empname VARCHAR2(50),
+    salary NUMBER(10,2),
+    comp_name VARCHAR2(100),
+    emp_dept NUMBER
+);
+
+INSERT INTO Employee (empid, empname, salary, comp_name, emp_dept) 
+VALUES 
+    (105, 'Alice Johnson', 48000, 'Jones', 10),
+    (106, 'Michael Lee', 62000, 'ABC Corp', 20),
+    (107, 'Sophia Wilson', 53000, 'XYZ Ltd', 30),
+    (108, 'David Miller', 75000, 'Jones', 40),
+    (109, 'Olivia White', 69000, 'ABC Corp', 10);
+
+SELECT empname, empid 
+FROM Employee 
+WHERE salary > (SELECT salary FROM Employee WHERE comp_name = 'Jones');
+
+SELECT empname, empid 
+FROM Employee 
+WHERE salary < ANY (SELECT salary FROM Employee WHERE emp_dept = 10);
+
+SELECT empname, empid 
+FROM Employee 
+WHERE salary < (SELECT AVG(salary) FROM Employee WHERE emp_dept = 10);
