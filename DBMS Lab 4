@@ -1,0 +1,59 @@
+--Make table from ER Diagram
+CREATE TABLE Employee (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    PayRate DECIMAL(10, 2),
+    PayType VARCHAR(50),
+    SupervisorID INT,
+    FOREIGN KEY (SupervisorID) REFERENCES Employee(EmpID)
+);
+
+CREATE TABLE City (
+    CityID INT PRIMARY KEY,
+    CityName VARCHAR(100)
+);
+
+CREATE TABLE Factory (
+    FactoryID INT PRIMARY KEY,
+    Location VARCHAR(100)
+);
+
+CREATE TABLE Works_At (
+    EmpID INT,
+    FactoryID INT,
+    Throughput VARCHAR(50),
+    PRIMARY KEY (EmpID, FactoryID),
+    FOREIGN KEY (EmpID) REFERENCES Employee(EmpID),
+    FOREIGN KEY (FactoryID) REFERENCES Factory(FactoryID)
+);
+
+CREATE TABLE Part (
+    PartNumber INT PRIMARY KEY,
+    Description VARCHAR(255),
+    Price DECIMAL(10, 2)
+);
+
+CREATE TABLE Vendor (
+    VendorID INT PRIMARY KEY,
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Supplies (
+    PartNumber INT,
+    VendorID INT,
+    Quantity INT,
+    PRIMARY KEY (PartNumber, VendorID),
+    FOREIGN KEY (PartNumber) REFERENCES Part(PartNumber),
+    FOREIGN KEY (VendorID) REFERENCES Vendor(VendorID)
+);
+
+CREATE TABLE Contains (
+    FactoryID INT,
+    PartNumber INT,
+    Number INT,
+    PRIMARY KEY (FactoryID, PartNumber),
+    FOREIGN KEY (FactoryID) REFERENCES Factory(FactoryID),
+    FOREIGN KEY (PartNumber) REFERENCES Part(PartNumber)
+);
