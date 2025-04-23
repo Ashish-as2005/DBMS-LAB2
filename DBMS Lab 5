@@ -1,0 +1,39 @@
+CREATE TABLE STUDENT (
+    Student_ID NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    Subject VARCHAR2(20),
+    Age NUMBER(2),
+    City VARCHAR2(30)
+);
+
+INSERT INTO STUDENT VALUES (1, 'Amit Sharma', 'Mathematics', 20, 'Delhi');
+INSERT INTO STUDENT VALUES (2, 'Priya Verma', 'Science', 21, 'Mumbai');
+INSERT INTO STUDENT VALUES (3, 'Rahul Singh', 'English', 19, 'Bangalore');
+INSERT INTO STUDENT VALUES (4, 'Neha Gupta', 'Mathematics', 22, 'Kolkata');
+INSERT INTO STUDENT VALUES (5, 'Rohan Das', 'Science', 20, 'Chennai');
+INSERT INTO STUDENT VALUES (6, 'Vikas Mehra', 'English', 21, 'Delhi');
+INSERT INTO STUDENT VALUES (7, 'Kiran Yadav', 'Science', 19, 'Pune');
+INSERT INTO STUDENT VALUES (8, 'Sohail Khan', 'Mathematics', 22, 'Hyderabad');
+INSERT INTO STUDENT VALUES (9, 'Ananya Bose', 'Science', 20, 'Jaipur');
+INSERT INTO STUDENT VALUES (10, 'Manoj Nair', 'English', 21, 'Bangalore');
+
+SELECT Subject, COUNT(*) AS Total_Students
+FROM STUDENT
+WHERE Subject IN ('Mathematics', 'Science', 'English')
+GROUP BY Subject;
+
+SELECT subject, COUNT(*) AS student_count  
+FROM student  
+GROUP BY subject  
+ORDER BY subject;
+
+SELECT SUM(marks) AS total_marks  
+FROM student  
+WHERE subject = 'Mathematics';
+
+SELECT * FROM student WHERE name LIKE 'A%';
+SELECT * FROM student WHERE name LIKE '%a';
+SELECT * FROM student WHERE name LIKE '%a%';
+SELECT * FROM student WHERE name LIKE '_r%';
+SELECT * FROM student WHERE name LIKE 'a_%_%';
+SELECT * FROM student WHERE name LIKE 'a%o';
