@@ -1,0 +1,56 @@
+Q--Program for general procedure selected records price is incremented by 500 ,Executing the procedure created and displaying the updated table .
+
+SET SERVEROUTPUT ON;
+
+CREATE TABLE it_items (
+    item_id NUMBER PRIMARY KEY,
+    item_name VARCHAR2(50),
+    actual_price NUMBER
+);
+
+INSERT INTO it_items VALUES (101, 'Router', 2500);
+INSERT INTO it_items VALUES (102, 'Switch', NULL);
+INSERT INTO it_items VALUES (103, 'Access Point', 1800);
+COMMIT;
+
+CREATE OR REPLACE PROCEDURE increment_price (
+    identity_number IN NUMBER,
+    total_number IN NUMBER
+) IS
+    price NUMBER;
+    null_price EXCEPTION;
+BEGIN
+    SELECT actual_price INTO price FROM it_items WHERE item_id = identity_number;
+
+    IF price IS NULL THEN
+        RAISE null_price;
+    ELSE
+        UPDATE it_items
+        SET actual_price = actual_price + total_number
+        WHERE item_id = identity_number;
+    END IF;
+
+EXCEPTION
+    WHEN null_price THEN
+        DBMS_OUTPUT.PUT_LINE('Price is null.');
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No item found with the given ID.');
+END;
+/
+
+BEGIN
+    increment_price(101, 500);
+END;
+/
+
+BEGIN
+    increment_price(102, 500);
+END;
+/
+
+BEGIN
+    increment_price(999, 500);
+END;
+/
+
+SELECT * FROM it_items;
