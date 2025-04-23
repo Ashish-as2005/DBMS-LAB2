@@ -1,0 +1,30 @@
+CREATE TABLE Student (
+    Roll_No INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Dept VARCHAR(50)
+);
+DESC Student;
+INSERT INTO Student (Roll_No, Name, Dept) VALUES
+(1, 'Alice', 'Computer Science'),
+(2, 'Bob', 'Mechanical'),
+(3, 'Charlie', 'Electrical'),
+(4, 'David', 'Civil'),
+(5, 'Eve', 'Computer Science'),
+(6, 'Frank', 'Mechanical'),
+(7, 'Grace', 'Electrical'),
+(8, 'Hank', 'Civil'),
+(9, 'Ivy', 'Computer Science'),
+(10, 'Jack', 'Mechanical'),
+(11, 'Kate', 'Electrical'),
+(12, 'Leo', 'Civil'),
+(13, 'Mia', 'Computer Science'),
+(14, 'Nick', 'Mechanical'),
+(15, 'Olivia', 'Electrical'),
+(16, 'Paul', 'Civil'),
+(17, 'Quinn', 'Computer Science'),
+(18, 'Ryan', 'Mechanical'),
+(19, 'Sophia', 'Electrical'),
+(20, 'Tom', 'Civil');
+
+SELECT * FROM Student;
+DELETE FROM Student WHERE Roll_No IN (1, 5, 10, 15, 20);
