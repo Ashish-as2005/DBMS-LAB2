@@ -1,0 +1,47 @@
+Q--create a table student(roll no ,name,dept) and write the queries to alter and update the table.
+1.add a column for phone number. 
+2.change the data type of the name,column.
+3.delete rows where dept is 'Mech'.
+4.Truncate the table.
+5.Insert 10 new records.
+6.update the dept of 'CSE' student to 'AIML'.
+7.Delete the dept column.
+8.Drop the student table.
+
+CREATE TABLE student (
+    roll_no INT PRIMARY KEY,
+    name VARCHAR(100),
+    dept VARCHAR(50)
+);
+ALTER TABLE student ADD phone_number VARCHAR(15);
+-- For MySQL
+ALTER TABLE student MODIFY name TEXT;
+
+-- For PostgreSQL
+-- ALTER TABLE student ALTER COLUMN name TYPE TEXT;
+
+DELETE FROM student WHERE dept = 'Mech';
+
+TRUNCATE TABLE student;
+
+INSERT INTO student (roll_no, name, dept, phone_number) VALUES
+(1, 'Alice', 'CSE', '1234567890'),
+(2, 'Bob', 'ECE', '2345678901'),
+(3, 'Charlie', 'CSE', '3456789012'),
+(4, 'David', 'EEE', '4567890123'),
+(5, 'Eva', 'Mech', '5678901234'),
+(6, 'Frank', 'CSE', '6789012345'),
+(7, 'Grace', 'Civil', '7890123456'),
+(8, 'Hank', 'CSE', '8901234567'),
+(9, 'Ivy', 'IT', '9012345678'),
+(10, 'Jack', 'CSE', '0123456789');
+
+UPDATE student SET dept = 'AIML' WHERE dept = 'CSE';
+
+ALTER TABLE student DROP COLUMN dept;
+
+DROP TABLE student;
+
+
+
+
