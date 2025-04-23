@@ -1,0 +1,50 @@
+CREATE TABLE Customer (
+    C_id NUMBER PRIMARY KEY,
+    C_Name VARCHAR2(50),
+    Address VARCHAR2(100)
+);
+
+CREATE TABLE Orders (
+    O_ID NUMBER PRIMARY KEY,
+    O_Name VARCHAR2(50),
+    C_Id NUMBER,
+    FOREIGN KEY (C_Id) REFERENCES Customer(C_id)
+);
+
+INSERT INTO Customer VALUES 
+    (1, 'John Doe', 'New York'),
+    (2, 'Alice Smith', 'Los Angeles'),
+    (3, 'Bob Johnson', 'Chicago');
+
+INSERT INTO Orders VALUES 
+    (101, 'Laptop', 1),
+    (102, 'Mobile', 2),
+    (103, 'Tablet', NULL);
+
+--INNER JOIN (Customers with Orders)
+SELECT C.C_id, C.C_Name, C.Address, O.O_ID, O.O_Name
+FROM Customer C
+INNER JOIN Orders O ON C.C_id = O.C_Id;
+
+-- LEFT OUTER JOIN (All Customers, even if they haven't placed an order)
+SELECT C.C_id, C.C_Name, C.Address, O.O_ID, O.O_Name
+FROM Customer C
+LEFT OUTER JOIN Orders O ON C.C_id = O.C_Id;
+
+--RIGHT OUTER JOIN (All Orders, even if they don’t have a matching customer)
+SELECT C.C_id, C.C_Name, C.Address, O.O_ID, O.O_Name
+FROM Customer C
+RIGHT OUTER JOIN Orders O ON C.C_id = O.C_Id;
+
+-- FULL OUTER JOIN (All Customers & Orders, including non-matching ones)
+SELECT C.C_id, C.C_Name, C.Address, O.O_ID, O.O_Name
+FROM Customer C
+FULL OUTER JOIN Orders O ON C.C_id = O.C_Id;
+
+--SELF JOIN (Comparing Customers with the same Address)
+SELECT A.C_id AS Customer1_ID, A.C_Name AS Customer1_Name, 
+       B.C_id AS Customer2_ID, B.C_Name AS Customer2_Name, 
+       A.Address
+FROM Customer A
+JOIN Customer B 
+ON A.Address = B.Address AND A.C_id <> B.C_id;
